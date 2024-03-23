@@ -12,4 +12,4 @@ $dbUser = 'root';
 $dbPass = '';
 
 //De url waarop jouw project staat. Géén slash aan het einde.
-$base_url = 'http://localhost/H8-prikbord';
+$base_url = 'http://localhost';
