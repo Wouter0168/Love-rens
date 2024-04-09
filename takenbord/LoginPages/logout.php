@@ -2,5 +2,5 @@
 require_once '../Configs/config.php';
 session_start();
 session_destroy();
-header("Location: $base_url/index.php");
+header("location: ". $base_url ."/StommeBugSysteemVanCurio/index.php");
 exit;

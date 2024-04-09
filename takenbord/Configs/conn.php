@@ -1,5 +1,3 @@
-
-<?php require_once 'config.php'; ?>
 <?php
 //Haal de configuratie op
 require_once 'config.php';

@@ -26,7 +26,7 @@ if($_GET['action'] == 'create') {
         ":status" => $status,
     ]);
 
-    header("location: ". $base_url ."/index.php");
+    header("location: ". $base_url ."/stommeBugSysteemVanCurio/index.php");
 }
 
 // edit code
@@ -57,7 +57,7 @@ if($_GET['action'] == 'edit') {
         ":id" => $_POST['id'],
     ]);
 
-    header("location: ". $base_url ."/index.php");
+    header("location: ". $base_url ."/stommeBugSysteemVanCurio/index.php");
 }
 
 // delete-code
@@ -70,7 +70,7 @@ if($_GET['action'] == 'delete') {
     $statement->execute([
         ":id" => $id,
     ]);
-    header("location: ". $base_url ."/index.php");
+    header("location: ". $base_url ."/stommeBugSysteemVanCurio/index.php");
 
 }
 

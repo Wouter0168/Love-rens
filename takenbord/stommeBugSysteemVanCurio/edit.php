@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <body>
 
     <?php require_once '../resources/header.php'; ?>
@@ -24,8 +25,15 @@
             <label for="persoon">Wie de taak moet doen:</label>
             <input type="text" name= 'persoon' value="<?php echo $taak['persoon'];?>" />
             <br>
-            <label for="sector">Welk sector van het bedrijf zit die?</label>
-            <input type="text" name= 'sector' value="<?php echo $taak['sector'];?>" />
+            <select name="sector">
+                    <option value="">welk sector moet het doen:</option>
+                    <option value="personeel" <?php if ($taak['sector'] == "personeel") { echo "selected"; }?>>Personeel</option>
+                    <option value="horeca" <?php if ($taak['sector'] == "horeca") { echo "selected"; }?>>Horeca</option>
+                    <option value="techniek" <?php if ($taak['sector'] == "techniek") { echo "selected"; }?>>Techniek</option>
+                    <option value="inkoop" <?php if ($taak['sector'] == "inkoop") { echo "selected"; }?>>Inkoop</option>
+                    <option value="klantenservice" <?php if ($taak['sector'] == "klantenservice") { echo "selected"; }?>>Klantenservice</option>
+                    <option value="groen" <?php if ($taak['sector'] == "groen") { echo "selected"; }?>>Groen</option>
+            </select>
             <br>
             <label for="status">Wat is de status van de taak:</label>
             <select name="status">

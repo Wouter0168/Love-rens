@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +19,8 @@ $statement = $conn->prepare($query);
 $statement->execute();
 $taken =  $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+<!-- SOON moeten allebij uit de takenlijst komen , persoon moet uit de database dus niet dat je iemand random kan type of selecteren of Sector.  -->
 <div class="container">
     <div class="filters">
         <h1>Taakbeheer</h1>
@@ -30,12 +33,12 @@ $taken =  $statement->fetchAll(PDO::FETCH_ASSOC);
             </select>
             <select id="filter-sector">
                 <option value="">-- Sector (SOON) --</option>
-                <option value="personeel">personeel</option>
-                <option value="horeca">horeca</option>
-                <option value="techniek">techniek</option>
-                <option value="inkoop">inkoop</option>
-                <option value="klantenservice">klantenservice</option>
-                <option value="groen">groen</option>
+                <option value="personeel">Personeel</option>
+                <option value="horeca">Horeca</option>
+                <option value="techniek">Techniek</option>
+                <option value="inkoop">Inkoop</option>
+                <option value="klantenservice">Klantenservice</option>
+                <option value="groen">Groen</option>
             </select>
             <select id="filter-status">
                 <option value="">-- Status --</option>
@@ -124,62 +127,25 @@ $taken =  $statement->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const filterPerson = document.getElementById("filter-person");
-    const filterSector = document.getElementById("filter-sector");
-    const filterStatus = document.getElementById("filter-status");
+    const filterPerson = document.getElementById('filter-person');
+    const filterSector = document.getElementById('filter-sector');
+    const filterStatus = document.getElementById('filter-status');
 
-    filterPerson.addEventListener("change", filterTasks);
-    filterSector.addEventListener("change", filterTasks);
-    filterStatus.addEventListener("change", filterTasks);
+    filterPerson.addEventListener('change', function() {
+        filter();
+    });
 
-    filterTasks(); // Filter taken bij het laden van de pagina
+    filterSector.addEventListener('change', function() {
+        filter();
+    });
 
-    function filterTasks() {
-        const person = filterPerson.value;
-        const sector = filterSector.value;
-        const status = filterStatus.value;
+    filterStatus.addEventListener('change', function() {
+        filter();
+    });
 
-        const todoDiv = document.querySelector(".todo");
-        const doingDiv = document.querySelector(".doing");
-        const doneDiv = document.querySelector(".done");
-
-        // Verberg alle secties voordat je gaat filteren
-        document.querySelectorAll(".todo, .doing, .done").forEach(function(element) {
-            element.style.display = "none";
-        });
-
-        // Toon alle secties als "-- Status --" is geselecteerd
-        if (status === "") {
-            document.querySelectorAll(".todo, .doing, .done").forEach(function(element) {
-                element.style.display = "block";
-            });
-        } else {
-            // Toon alleen de relevante sectie op basis van de geselecteerde status
-            if (status === "todo") {
-                todoDiv.style.display = "block";
-                populateTable(taken.filter(task => task.status === "ToDo"), document.getElementById("todo-table"));
-            } else if (status === "doing") {
-                doingDiv.style.display = "block";
-                populateTable(taken.filter(task => task.status === "Doing"), document.getElementById("doing-table"));
-            } else if (status === "done") {
-                doneDiv.style.display = "block";
-                populateTable(taken.filter(task => task.status === "Done"), document.getElementById("done-table"));
-            }
-        }
+    funcion filter() {
+        window.location.replace("<?php echo $base_url; ?>/stommeBugSysteemVanCurio/index.php?filterPerson=" + filterPerson.value + "&filterSector=" + filterSector.value + "&filterStatus=" + filterStatus.value);
     }
-
-    function populateTable(tasks, table) {
-        // Clear table content
-        table.innerHTML = '';
-
-        // Add table rows for each task
-        tasks.forEach(task => {
-            const row = table.insertRow();
-            row.innerHTML = `<td>${task.taak}</td><td>${task.sector}</td><td>${task.persoon}</td><td>${task.status}</td><td><a href="edit.php?id=${task.id}">Edit</a></td>`;
-        });
-    }
-});
 </script>
 </body>
 </html>

@@ -8,6 +8,7 @@
 
 <body>
     <?php require_once '../resources/header.php'; ?>
+    
     <div class="container home">
         <form action="<?php echo $base_url ?>/loginPages/loginController.php" method="POST">
             <input type="text" name="username" placeholder="Gebruikersnaam">
